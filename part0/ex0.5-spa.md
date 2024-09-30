@@ -27,5 +27,5 @@ sequenceDiagram
     activate server
     server -->> browser: Res. 200 OK & JSON Data
     deactivate server
-    note over user, browser: browser successfully rendererd a <br> spa version of Notes example app
+    note over browser: browser successfully rendererd a <br> spa version of Notes example app
 ```

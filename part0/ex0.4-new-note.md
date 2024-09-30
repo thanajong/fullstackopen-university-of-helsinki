@@ -32,5 +32,5 @@ sequenceDiagram
     activate server
     server -->> browser: Res. 200 OK & JSON Data
     deactivate server
-    note over user,browser: browser successfully rendererd a <br> new list of Notes on HTML Document
+    note over browser: browser successfully rendererd a <br> new list of Notes on HTML Document
 ```
