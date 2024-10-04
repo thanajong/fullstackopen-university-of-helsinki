@@ -14,26 +14,31 @@ const FeedbackButton = (props) => {
   )
 }
 
+const StatisticLine = (props) => {
+  return (
+    <p>{props.text}: {props.value}</p>
+  )
+}
+
 const Statistics = ({ f }) => {
   const sum = f.good + f.neutral + f.bad
   const average = sum / 3
   const positive = f.good / sum
 
   if (sum === 0) {
-    return ( 
+    return (
       <p>No feedback given.</p>
     )
   }
   else {
     return (
       <div>
-        <h1>Statistics</h1>
-        <p>Good: {f.good}</p>
-        <p>Neutral: {f.neutral}</p>
-        <p>Bad: {f.bad}</p>
-        <p>All: {sum}</p>
-        <p>Average: {average}</p>
-        <p>Positive: {positive}</p>
+        <StatisticLine text='Good' value={f.good} />
+        <StatisticLine text='Neutral' value={f.neutral} />
+        <StatisticLine text='Bad' value={f.bad} />
+        <StatisticLine text='All' value={sum} />
+        <StatisticLine text='Average' value={average} />
+        <StatisticLine text='Positive' value={positive} />
       </div>
     )
   }
