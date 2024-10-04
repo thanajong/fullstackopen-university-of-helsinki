@@ -14,22 +14,29 @@ const FeedbackButton = (props) => {
   )
 }
 
-const Statistics = ( {f} ) => {
+const Statistics = ({ f }) => {
   const sum = f.good + f.neutral + f.bad
   const average = sum / 3
   const positive = f.good / sum
 
-  return (
-    <>
-      <h1>Statistics</h1>
-      <p>Good: {f.good}</p>
-      <p>Neutral: {f.neutral}</p>
-      <p>Bad: {f.bad}</p>
-      <p>All: {sum}</p>
-      <p>Average: {average}</p>
-      <p>Positive: {positive}</p>
-    </>
-  )
+  if (sum === 0) {
+    return ( 
+      <p>No feedback given.</p>
+    )
+  }
+  else {
+    return (
+      <div>
+        <h1>Statistics</h1>
+        <p>Good: {f.good}</p>
+        <p>Neutral: {f.neutral}</p>
+        <p>Bad: {f.bad}</p>
+        <p>All: {sum}</p>
+        <p>Average: {average}</p>
+        <p>Positive: {positive}</p>
+      </div>
+    )
+  }
 }
 
 const App = () => {
@@ -70,7 +77,7 @@ const App = () => {
       <FeedbackButton name='good' onClick={onGoodClick} />
       <FeedbackButton name='neutral' onClick={onNeutralClick} />
       <FeedbackButton name='bad' onClick={onBadClick} />
-      <Statistics f={feedback}/>
+      <Statistics f={feedback} />
     </>
   )
 }
