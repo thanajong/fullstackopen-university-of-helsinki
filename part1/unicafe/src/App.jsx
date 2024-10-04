@@ -21,7 +21,8 @@ const StatisticLine = (props) => {
 }
 
 const Statistics = ({ f }) => {
-  const sum = f.good + f.neutral + f.bad
+  const total = f.good + f.neutral + f.bad
+  const sum = f.good + (f.neutral / 2) - f.bad
   const average = sum / 3
   const positive = f.good / sum
 
@@ -36,7 +37,7 @@ const Statistics = ({ f }) => {
         <StatisticLine text='Good' value={f.good} />
         <StatisticLine text='Neutral' value={f.neutral} />
         <StatisticLine text='Bad' value={f.bad} />
-        <StatisticLine text='All' value={sum} />
+        <StatisticLine text='All' value={total} />
         <StatisticLine text='Average' value={average} />
         <StatisticLine text='Positive' value={positive} />
       </div>
