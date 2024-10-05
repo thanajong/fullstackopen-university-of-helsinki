@@ -16,7 +16,7 @@ const FeedbackButton = (props) => {
 
 const StatisticLine = (props) => {
   return (
-    <p>{props.text}: {props.value}</p>
+    <td>{props.text}: {props.value}</td>
   )
 }
 
@@ -24,7 +24,7 @@ const Statistics = ({ f }) => {
   const total = f.good + f.neutral + f.bad
   const sum = f.good + (f.neutral / 2) - f.bad
   const average = sum / 3
-  const positive = f.good / sum
+  const positive = f.good / total
 
   if (total === 0) {
     return (
@@ -35,19 +35,16 @@ const Statistics = ({ f }) => {
     return (
       <div>
         <h1>Statistics</h1>
-        <StatisticLine text='Good' value={f.good} />
-        <StatisticLine text='Neutral' value={f.neutral} />
-        <StatisticLine text='Bad' value={f.bad} />
-        <StatisticLine text='All' value={total} />
-        <StatisticLine text='Average' value={average} />
-        <StatisticLine text='Positive' value={positive} />
-        {/* <table>
+        <table>
           <tbody>
-            <tr>
-              <td><StatisticLine text='Good' value={f.good} /></td>
-            </tr>
+            <tr><StatisticLine text='Good' value={f.good} /></tr>
+            <tr><StatisticLine text='Neutral' value={f.neutral} /></tr>
+            <tr><StatisticLine text='Bad' value={f.bad} /></tr>
+            <tr><StatisticLine text='All' value={total} /></tr>
+            <tr><StatisticLine text='Average' value={average} /></tr>
+            <tr><StatisticLine text='Positive' value={positive} /></tr>
           </tbody>
-        </table> */}
+        </table>
       </div>
     )
   }
