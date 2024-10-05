@@ -8,9 +8,7 @@ const Header = () => {
 
 const FeedbackButton = (props) => {
   return (
-    <button onClick={props.onClick}>
-      {props.name}
-    </button>
+    <button onClick={props.onClick}>{props.name}</button>
   )
 }
 
