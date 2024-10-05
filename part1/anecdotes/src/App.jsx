@@ -2,13 +2,22 @@ import { useState } from 'react'
 
 const AnecdoteDisplay = (props) => {
   return (
-    <div>{props.anecdote}</div>
+    <div>
+      <h2>{props.anecdote}</h2>
+      <span>Anecdote has been up {props.vote} votes</span>
+    </div>
   )
 }
 
-const AnecdoteButton = (props) => {
+const AnecdoteNextButton = (props) => {
   return (
     <button onClick={props.onClick}>next anecdote</button>
+  )
+}
+
+const AnecdoteVoteButton = (props) => {
+  return (
+    <button onClick={props.onClick}>vote</button>
   )
 }
 
@@ -24,19 +33,39 @@ const App = () => {
     'The only way to go fast, is to go well.'
   ]
 
-  const [selected, setSelected] = useState(Math.floor(Math.random() * 8))
-  // Also random the initiated anecdote
+  const [selected, setSelected] = useState(0)
+  // Starts with state 'selected' = 0
 
-  const onClick = () => {
+  const [points, setPoints] = useState({
+    0: 0,
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+    6: 0,
+    7: 0
+  })
+
+  const onClickNext = () => {
     const random = Math.floor(Math.random() * 8)
-    console.log(random)
+    console.log('random to: ', random)
     setSelected(random)
   }
 
+  const onClickVote = () => {
+    const copy = { ...points }
+    copy[selected] += 1
+    setPoints(copy)
+    console.log(selected, 'up')
+  }
+  console.log('now', selected)
+  console.log('points', points)
   return (
     <div>
-      <AnecdoteDisplay anecdote={anecdotes[selected]} />
-      <AnecdoteButton onClick={onClick} />
+      <AnecdoteDisplay anecdote={anecdotes[selected]} vote={points[selected]}/>
+      <AnecdoteNextButton onClick={onClickNext} />
+      <AnecdoteVoteButton onClick={onClickVote} />
     </div>
   )
 }
