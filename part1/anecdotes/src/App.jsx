@@ -3,8 +3,9 @@ import { useState } from 'react'
 const AnecdoteDisplay = (props) => {
   return (
     <div>
-      <h2>{props.anecdote}</h2>
-      <span>Anecdote has been up {props.vote} votes</span>
+      <h1>{props.text}</h1>
+      <h3><i>{props.anecdote}</i></h3>
+      <p>Anecdote has been up {props.vote} votes</p>
     </div>
   )
 }
@@ -34,8 +35,6 @@ const App = () => {
   ]
 
   const [selected, setSelected] = useState(0)
-  // Starts with state 'selected' = 0
-
   const [points, setPoints] = useState({
     0: 0,
     1: 0,
@@ -46,6 +45,7 @@ const App = () => {
     6: 0,
     7: 0
   })
+  const [top, setTop] = useState(null)
 
   const onClickNext = () => {
     const random = Math.floor(Math.random() * 8)
@@ -54,18 +54,40 @@ const App = () => {
   }
 
   const onClickVote = () => {
+    // Vote handler
     const copy = { ...points }
     copy[selected] += 1
     setPoints(copy)
     console.log(selected, 'up')
+    console.log('points state before', Object.values(points))
+    console.log('points state after', Object.values(copy))
+    // Find top votes after every vote button clicks.
+    // ***
+    /// We're gonna keep using the copy object first
+    // because the 'points' state isnt updated yet.
+    // Even if we used setPoints(copy) already, but 
+    // there are more lines in this function to be compiled.
+    // The state re-rendering is scheduled to do after this function finishes.
+    // That makes our copy object the most up-to-dated 'points' state now.
+    /// ***
+    if (top === null || copy[top] < copy[selected]) {
+      console.log('top value before', copy[top])
+      console.log('top value after', copy[selected])
+      setTop(selected)
+    }
   }
-  console.log('now', selected)
-  console.log('points', points)
+
+  console.log('now >>', selected)
+  console.log('points', Object.values(points))
+  console.log('top-index', top)
+  console.log('top-value', points[top])
+  console.log('----------------------------------------------------------------------------------------')
   return (
     <div>
-      <AnecdoteDisplay anecdote={anecdotes[selected]} vote={points[selected]}/>
+      <AnecdoteDisplay text='Anecdote of the day' anecdote={anecdotes[selected]} vote={points[selected]} />
       <AnecdoteNextButton onClick={onClickNext} />
       <AnecdoteVoteButton onClick={onClickVote} />
+      <AnecdoteDisplay text='Top anecdote' anecdote={anecdotes[top]} vote={points[top]} />
     </div>
   )
 }
