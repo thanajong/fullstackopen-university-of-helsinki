@@ -34,6 +34,7 @@ const Statistics = ({ f }) => {
   else {
     return (
       <div>
+        <h1>Statistics</h1>
         <StatisticLine text='Good' value={f.good} />
         <StatisticLine text='Neutral' value={f.neutral} />
         <StatisticLine text='Bad' value={f.bad} />
@@ -41,15 +42,9 @@ const Statistics = ({ f }) => {
         <StatisticLine text='Average' value={average} />
         <StatisticLine text='Positive' value={positive} />
         {/* <table>
-          <thead>
-            <tr>
-              <th>Criteria</th>
-              <th>Value</th>
-            </tr>
-          </thead>
           <tbody>
             <tr>
-              <td></td>
+              <td><StatisticLine text='Good' value={f.good} /></td>
             </tr>
           </tbody>
         </table> */}
