@@ -26,7 +26,7 @@ const Statistics = ({ f }) => {
   const average = sum / 3
   const positive = f.good / sum
 
-  if (sum === 0) {
+  if (total === 0) {
     return (
       <p>No feedback given.</p>
     )
@@ -40,6 +40,19 @@ const Statistics = ({ f }) => {
         <StatisticLine text='All' value={total} />
         <StatisticLine text='Average' value={average} />
         <StatisticLine text='Positive' value={positive} />
+        {/* <table>
+          <thead>
+            <tr>
+              <th>Criteria</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+            </tr>
+          </tbody>
+        </table> */}
       </div>
     )
   }
