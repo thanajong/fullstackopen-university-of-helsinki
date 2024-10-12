@@ -1,9 +1,13 @@
-const Header = ({ name }) => {
-  return <h1>{name}</h1>
+const Curriculum = ({ curriculum }) => {
+  return <h1>{curriculum}</h1>
+}
+
+const Name = ({ name }) => {
+  return <h2>{name}</h2>
 }
 
 const Part = ({ name, exercises }) => {
-  return <li> <span>{name}</span>: <span>{exercises}</span> </li>
+  return <li><span>{name}</span>: <span>{exercises}</span></li>
 }
 
 const Content = ({ parts }) => {
@@ -15,13 +19,14 @@ const Sum = ({ parts }) => {
   return <p><b>Total of {total} exercises</b></p>
 }
 
-const Course = ({ courses }) => {
+const Course = ({ curriculum, courses }) => {
   return (
     <>
+      <Curriculum curriculum={curriculum} />
       {courses.map((course) => {
         return (
           <div key={course.id} className="course">
-            <Header name={course.name} />
+            <Name name={course.name} />
             <Content parts={course.parts} />
             <Sum parts={course.parts} />
           </div>
@@ -32,6 +37,7 @@ const Course = ({ courses }) => {
 }
 
 const App = () => {
+  const curriculum = "Web development curriculum"
   const courses = [
     {
       name: 'Half Stack application development',
@@ -77,7 +83,7 @@ const App = () => {
     }
   ]
 
-  return <Course courses={courses} />
+  return <Course curriculum={curriculum} courses={courses} />
 }
 
 export default App
