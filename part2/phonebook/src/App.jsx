@@ -9,7 +9,12 @@ const App = () => {
   const onAdd = (event) => {
     //prevent page reloading
     event.preventDefault()
-
+    for(let i = 0; i < persons.length; i++){
+      if(newName === persons[i].name){
+        alert(`${newName} is already existed.`)
+        return
+      }
+    }
     const personObject = {
       id: persons.length + 1,
       name: newName
