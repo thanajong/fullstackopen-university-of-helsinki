@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
-const Header = ({header}) => {
+const Header = ({ header }) => {
   return <h1><span>{header}</span></h1>
 }
 
-const Filter = ({setFilter}) => {
+const Filter = ({ setFilter }) => {
   const handleFilterChange = (event) => {
     console.log(`filter: ${event.target.value}`)
     setFilter(event.target.value)
@@ -20,12 +21,12 @@ const Filter = ({setFilter}) => {
   )
 }
 
-const Add = ({persons, setPersons}) => {
+const Add = ({ persons, setPersons }) => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
 
   const onAdd = (event) => {
-    
+
     //prevent page reloading
     event.preventDefault()
 
@@ -86,7 +87,7 @@ const Add = ({persons, setPersons}) => {
   )
 }
 
-const Display = ({persons, filter}) => {
+const Display = ({ persons, filter }) => {
   const personsToShow = persons.filter((person) => person.name.includes(filter))
   return (
     <>
@@ -99,17 +100,26 @@ const Display = ({persons, filter}) => {
 }
 
 const App = () => {
-  const [persons, setPersons] = useState([
-    { id: 1, name: 'Arto Hellas', number: "0123456789" }
-  ])
+  const [persons, setPersons] = useState([])
   const [filter, setFilter] = useState('')
+
+  const hook = () => {
+    axios
+      .get('http://localhost:3001/persons')
+      .then(response => {
+        const body = response.data
+        setPersons(body)
+      })
+  }
+
+  useEffect(hook, [])
 
   return (
     <div>
       <Header header='Phonebook' />
-      <Filter setFilter={setFilter}/>
-      <Add persons={persons} setPersons={setPersons}/>
-      <Display persons={persons} filter={filter}/>
+      <Filter setFilter={setFilter} />
+      <Add persons={persons} setPersons={setPersons} />
+      <Display persons={persons} filter={filter} />
     </div>
   )
 }
